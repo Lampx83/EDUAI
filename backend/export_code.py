@@ -1,25 +1,27 @@
 import os
 
 # ================== CẤU HÌNH ==================
-PROJECT_ROOT = "../.."                 # Thư mục gốc dự án
+PROJECT_ROOT = "."                 # Thư mục gốc dự án
 OUTPUT_FILE = "project_code.txt"  # File xuất code
 
 # Thư mục không duyệt
 EXCLUDE_DIRS = {
     ".git", "__pycache__", "venv", ".venv",
-    "env", "node_modules", ".idea", ".vscode"
+    "env", "node_modules", ".idea", ".vscode",
 }
 
 # File Python không export
 EXCLUDE_FILES = {
-    "__init__.py"
+    "__init__.py", "export_code.py",
 }
 
 # File đặc biệt cần export (không phải .py)
 EXTRA_FILES = {
     "requirements.txt",
+    "docker-compose.yml",
     "Dockerfile",
-    "env.example"
+    "env.example",
+    "pyproject.toml"
 }
 # =============================================
 
