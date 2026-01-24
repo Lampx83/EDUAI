@@ -122,12 +122,32 @@ GET /health
 ### 5.2 Chạy thủ công (dev mode)
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install --upgrade pip setuptools
+python -m pip install -r requirements.txt
+python -m pip install -e .
 
 uvicorn eduai.backend.main:app --reload --port 8011
 ```
+
+### 5.3 Khởi động thủ công 
+
+Qdrant là Vector Database độc lập, EDUAI không tự khởi động Qdrant.
+Trước khi chạy Bước 4 – Ingest vào Qdrant, cần đảm bảo Qdrant đang chạy.
+
+```
+docker run -d \
+  --name qdrant \
+  -p 6333:6333 \
+  -p 6334:6334 \
+  qdrant/qdrant
+```
+Kiểm tra Qdrant đã sẵn sàng:
+
+curl http://localhost:6333/collections
+
+Nếu trả về JSON → Qdrant đã chạy.
 
 ---
 
@@ -136,7 +156,7 @@ uvicorn eduai.backend.main:app --reload --port 8011
 ### 6.1 Bước 0 – Ingest Inbox → Raw
 
 ```bash
-python eduai/scripts/step0_ingest_inbox.py
+python src/eduai/scripts/step0_inbox.py
 ```
 
 Chức năng:
@@ -151,7 +171,7 @@ Chức năng:
 ### 6.2 Bước 1 – Staging (PDF)
 
 ```bash
-python eduai/scripts/step1_staging.py
+python src/eduai/scripts/step1_raw.py
 ```
 
 Sinh:
@@ -164,7 +184,7 @@ Sinh:
 ### 6.3 Bước 2 – Processed (AI-ready)
 
 ```bash
-python eduai/scripts/step2_processed.py
+python src/eduai/scripts/step2_staging.py
 ```
 
 Sinh:
@@ -179,7 +199,7 @@ Sinh:
 ### 6.4 Bước 3 – Embeddings
 
 ```bash
-python eduai/scripts/step3_embeddings.py
+python src/eduai/scripts/step3_processed_files.py
 ```
 
 Sinh:
@@ -194,7 +214,7 @@ Sinh:
 ### 6.5 Bước 4 – Ingest vào Qdrant
 
 ```bash
-python eduai/scripts/step41_qdrant_ingest.py
+python src/eduai/scripts/step41_qdrant_ingest.py
 ```
 
 ---
