@@ -122,12 +122,3 @@ Chỉ cần:
 ```bash
 docker compose up -d --build
 ```
-
----
-
-## Giấy phép
-
-Internal / Private project
-
-```
-
