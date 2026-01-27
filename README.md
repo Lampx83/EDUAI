@@ -1,5 +1,3 @@
-
-````markdown
 # Project Overview
 
 Hệ thống được thiết kế để chạy **toàn bộ bằng Docker**, đảm bảo tính nhất quán môi trường, dễ triển khai và dễ mở rộng. Người dùng **không cần cài đặt trực tiếp Python hay các thư viện phụ thuộc** trên máy host.
