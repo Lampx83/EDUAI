@@ -37,7 +37,7 @@ docker compose version
 Sao chép file mẫu:
 
 ```bash
-cp env.example .env.local
+cp env.example .env
 ```
 
 Chỉnh sửa `.env` theo cấu hình mong muốn (port, database, API key, … nếu có).
@@ -114,9 +114,3 @@ Hệ thống có thể triển khai trực tiếp trên:
 * VPS
 * Server vật lý
 * Cloud (AWS / GCP / Azure)
-
-Chỉ cần:
-
-```bash
-docker compose up -d --build
-```
