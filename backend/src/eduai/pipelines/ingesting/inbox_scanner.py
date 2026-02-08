@@ -1,22 +1,14 @@
 """
 Inbox Scanner
 
-<<<<<<< HEAD
 - Quét 000_inbox (toàn bộ hoặc chỉ các thư mục chỉ định)
-=======
-- Quét toàn bộ 000_inbox
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 - Chỉ yield FILE (không yield thư mục)
 - Domain = thư mục cấp 1 dưới 000_inbox
 - Có log tổng số file để debug / quan sát pipeline
 """
 
 from pathlib import Path
-<<<<<<< HEAD
 from typing import Iterator, Optional
-=======
-from typing import Iterator
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 from eduai.pipelines.ingesting.models import InboxFile
 
@@ -32,7 +24,6 @@ ALLOWED_EXTENSIONS = {
 }
 
 
-<<<<<<< HEAD
 def scan_inbox(
     inbox_root: Path,
     only_under: Optional[list[str]] = None,
@@ -41,12 +32,6 @@ def scan_inbox(
     Scan inbox_root (000_inbox) và yield InboxFile.
 
     only_under: nếu có, chỉ quét dưới các path này (vd: ["Regulations and Policies"]).
-=======
-def scan_inbox(inbox_root: Path) -> Iterator[InboxFile]:
-    """
-    Scan inbox_root (000_inbox) và yield InboxFile.
-
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     Cấu trúc mong đợi:
         000_inbox/
             <domain>/
@@ -65,7 +50,6 @@ def scan_inbox(inbox_root: Path) -> Iterator[InboxFile]:
         return
 
     # --------------------------------------------------
-<<<<<<< HEAD
     # Chỉ quét dưới only_under nếu có; ngược lại quét toàn bộ
     # --------------------------------------------------
     if only_under:
@@ -86,16 +70,6 @@ def scan_inbox(inbox_root: Path) -> Iterator[InboxFile]:
         f"[INBOX] Scan complete: "
         f"{len(file_paths)} files found"
         + (f" under {only_under}" if only_under else f" under {inbox_root}")
-=======
-    # Collect all paths (debug-friendly)
-    # --------------------------------------------------
-    all_paths = list(inbox_root.rglob("*"))
-    file_paths = [p for p in all_paths if p.is_file()]
-
-    print(
-        f"[INBOX] Scan complete: "
-        f"{len(file_paths)} files found under {inbox_root}"
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     )
 
     if not file_paths:

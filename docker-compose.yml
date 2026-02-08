@@ -27,7 +27,6 @@ services:
       - .env
     environment:
       EDUAI_DATA_BASE_PATH: /data
-<<<<<<< HEAD
       # Mặc định Qdrant khi chạy Docker (không chọn gì = eduai-qdrant:6333)
       QDRANT_HOST: eduai-qdrant
       QDRANT_PORT: "6333"
@@ -36,10 +35,6 @@ services:
       # Mount source for hot-reload when developing
       - ./backend/src:/app/src
     command: uvicorn eduai.main:app --host 0.0.0.0 --port 8011 --reload
-=======
-    volumes:
-      - eduai_data:/data
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     restart: unless-stopped
 
 
@@ -70,9 +65,5 @@ volumes:
     driver_opts:
       type: none
       o: bind
-<<<<<<< HEAD
       device: /Users/mac/Library/CloudStorage/SynologyDrive-research
-=======
-      device: /Users/mac/Library/CloudStorage/SynologyDrive-education
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
   qdrant_data:

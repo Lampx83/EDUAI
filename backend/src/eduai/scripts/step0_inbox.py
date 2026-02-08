@@ -4,7 +4,6 @@ Step 0 – Inbox Ingestion
 """
 
 from pathlib import Path
-<<<<<<< HEAD
 import logging
 import os
 
@@ -13,10 +12,6 @@ logging.basicConfig(
     format="%(levelname)s [%(name)s] %(message)s",
 )
 
-=======
-import os
-
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 from eduai.runtime.config import runtime_config
 from eduai.catalog.db import get_connection, init_db
 from eduai.pipelines.ingesting.pipeline import run_ingestion
@@ -56,7 +51,6 @@ init_db(conn)
 
 print("=== RUN INGESTION (000_inbox → 100_raw) ===")
 
-<<<<<<< HEAD
 only_folders_env = os.getenv("PIPELINE_ONLY_FOLDERS")
 only_path_prefixes = [s.strip() for s in (only_folders_env or "").split(",") if s.strip()] or None
 force_rerun = os.getenv("PIPELINE_FORCE_RERUN") == "1"
@@ -65,8 +59,6 @@ if only_path_prefixes:
 if force_rerun:
     print("[INBOX] Force re-run: chạy lại kể cả đã ingest")
 
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 before = conn.execute(
     "SELECT COUNT(*) FROM raw_objects"
 ).fetchone()[0]
@@ -75,11 +67,8 @@ run_ingestion(
     inbox_root=paths.inbox_path(),
     raw_root=paths.raw_path(),
     conn=conn,
-<<<<<<< HEAD
     only_path_prefixes=only_path_prefixes,
     force_rerun=force_rerun,
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 )
 
 after = conn.execute(

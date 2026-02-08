@@ -37,18 +37,13 @@ docker compose version
 Sao chép file mẫu:
 
 ```bash
-<<<<<<< HEAD
 cp .env.example .env
-=======
-cp env.example .env
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ```
 
 Chỉnh sửa `.env` theo cấu hình mong muốn (port, database, API key, … nếu có).
 
 ---
 
-<<<<<<< HEAD
 ## Chạy DEV (frontend + backend trên máy, không Docker)
 
 Khi phát triển trên máy (backend + Streamlit UI chạy trực tiếp, không qua Docker):
@@ -121,8 +116,6 @@ Frontend chạy tại: **http://localhost:8501**
 
 ---
 
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ## Chạy hệ thống bằng Docker
 
 ### 2. Build và khởi động toàn bộ hệ thống
@@ -192,7 +185,6 @@ Hệ thống có thể triển khai trực tiếp trên:
 
 * VPS
 * Server vật lý
-<<<<<<< HEAD
 * Cloud (AWS / GCP / Azure)
 
 ### Deploy tự động khi push lên `main` (GitHub Actions)
@@ -236,6 +228,3 @@ Sau khi cấu hình, mỗi lần push lên `main`, workflow sẽ tự deploy lê
 
 3. **Volume dữ liệu (prod)**  
    `docker-compose.prod.yml` dùng named volume `eduai_data` (không bind path host). Data nằm trong volume Docker; cần backup hoặc mount path cụ thể nếu muốn lưu ra ổ đĩa server.
-=======
-* Cloud (AWS / GCP / Azure)
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56

@@ -15,7 +15,6 @@ def _resolve_api_base() -> str:
 API_BASE = _resolve_api_base()
 EDUAI_MODE = os.getenv("EDUAI_MODE", "DEV")
 
-<<<<<<< HEAD
 # Qdrant Service: mặc định khi không chọn (dev = localhost, docker = eduai-qdrant)
 QDRANT_DEFAULT_DEV = "http://localhost:6333"
 QDRANT_DEFAULT_DOCKER = "http://eduai-qdrant:6333"
@@ -84,8 +83,6 @@ def qdrant_service_options():
     extra = _parse_qdrant_services_env()
     return base + extra
 
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 # =========================
 # DATA ROOT (CRITICAL)
 # =========================

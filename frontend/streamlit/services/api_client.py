@@ -12,7 +12,6 @@ def login(username: str, password: str) -> str | None:
     return None
 
 
-<<<<<<< HEAD
 def get_me(token: str) -> dict | None:
     """Lấy thông tin user hiện tại (username) từ token. Dùng để lọc lịch sử theo tài khoản."""
     resp = requests.get(
@@ -47,8 +46,6 @@ def admin_delete_user_messages(username: str, token: str) -> dict:
     return resp.json()
 
 
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 def semantic_search(
     query: str,
     top_k: int,
@@ -56,10 +53,7 @@ def semantic_search(
     *,
     collection_name: str | None = None,
     score_threshold: float | None = None,
-<<<<<<< HEAD
     qdrant_url: str | None = None,
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ):
     headers = {"Authorization": f"Bearer {token}"}
     payload = {"query": query, "top_k": top_k}
@@ -67,11 +61,8 @@ def semantic_search(
         payload["collection_name"] = collection_name
     if score_threshold is not None:
         payload["score_threshold"] = score_threshold
-<<<<<<< HEAD
     if qdrant_url:
         payload["qdrant_url"] = qdrant_url
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     resp = requests.post(
         f"{API_BASE}/search/semantic",
         json=payload,
@@ -90,10 +81,7 @@ def qa(
     *,
     collection_name: str | None = None,
     score_threshold: float | None = None,
-<<<<<<< HEAD
     qdrant_url: str | None = None,
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ):
     headers = {"Authorization": f"Bearer {token}"}
     payload = {
@@ -105,11 +93,8 @@ def qa(
         payload["collection_name"] = collection_name
     if score_threshold is not None:
         payload["score_threshold"] = score_threshold
-<<<<<<< HEAD
     if qdrant_url:
         payload["qdrant_url"] = qdrant_url
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     resp = requests.post(
         f"{API_BASE}/search/qa",
         json=payload,

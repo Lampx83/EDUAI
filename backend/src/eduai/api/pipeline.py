@@ -1,26 +1,14 @@
-<<<<<<< HEAD
 from fastapi import APIRouter, Body, HTTPException
-=======
-from fastapi import APIRouter, HTTPException
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 import subprocess
 import sys
 import os
 from pathlib import Path
-<<<<<<< HEAD
 from typing import Optional
 
 from pydantic import BaseModel
 
 router = APIRouter()
 
-=======
-
-router = APIRouter()
-
-from pathlib import Path
-
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 SCRIPTS_DIR = (
     Path(__file__).resolve()
     .parents[1]      # eduai/
@@ -35,7 +23,6 @@ ALLOWED = {
     "step4": "step3_processed_qdrant.py",
 }
 
-<<<<<<< HEAD
 
 class RunStepBody(BaseModel):
     """Chỉ chạy trên các thư mục được chọn; để trống = chạy toàn bộ. force_rerun = chạy lại kể cả đã làm rồi. collection_name = chỉ step4 (Qdrant). qdrant_url = chỉ step4 (insert vào Qdrant Service này)."""
@@ -119,10 +106,6 @@ def list_folders(step: str) -> dict:
 
 @router.post("/run/{step}")
 def run_step(step: str, body: Optional[RunStepBody] = Body(default=None)):
-=======
-@router.post("/run/{step}")
-def run_step(step: str):
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     if step not in ALLOWED:
         raise HTTPException(status_code=400, detail="Invalid step")
 
@@ -131,7 +114,6 @@ def run_step(step: str):
         raise HTTPException(status_code=404, detail=f"Script not found: {script_path}")
 
     env = os.environ.copy()
-<<<<<<< HEAD
     env["PYTHONPATH"] = env.get("PYTHONPATH", "/app/src")
     if body and body.only_folders:
         env["PIPELINE_ONLY_FOLDERS"] = ",".join(body.only_folders)
@@ -161,10 +143,6 @@ def run_step(step: str):
         env["EDUAI_MODE"] = os.getenv("EDUAI_MODE", "")
     except RuntimeError:
         pass
-=======
-    # backend Dockerfile đã đặt PYTHONPATH=/app/src, nhưng set lại cho chắc
-    env["PYTHONPATH"] = env.get("PYTHONPATH", "/app/src")
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     try:
         p = subprocess.run(

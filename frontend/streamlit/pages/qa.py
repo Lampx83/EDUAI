@@ -2,20 +2,14 @@
 
 import pandas as pd
 import streamlit as st
-<<<<<<< HEAD
 from datetime import datetime
 
 from config.settings import qdrant_service_options, normalize_qdrant_url
 from services.api_client import qa, get_me
-=======
-
-from services.api_client import qa
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 from services.qdrant_service import list_collections
 from state.session import require_login
 
 
-<<<<<<< HEAD
 def _ensure_qa_history_by_user():
     if "qa_history_by_user" not in st.session_state:
         st.session_state.qa_history_by_user = {}
@@ -32,19 +26,14 @@ def _current_username(token: str) -> str | None:
     return None
 
 
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 def render():
     if not require_login():
         return
 
-<<<<<<< HEAD
     _ensure_qa_history_by_user()
     token = st.session_state.token
     current_user = _current_username(token)
 
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     st.header("🤖 Hỏi đáp với AI")
     st.caption(
         "**Demo RAG:** Tính năng này dùng để demo RAG (Retrieval-Augmented Generation). "
@@ -53,7 +42,6 @@ def render():
         "Nếu context không đủ, AI sẽ nói rõ không có thông tin. Trả lời bằng tiếng Việt."
     )
 
-<<<<<<< HEAD
     # --------------------------------------------------
     # Lịch sử trò chuyện (chỉ của tài khoản hiện tại)
     # --------------------------------------------------
@@ -99,15 +87,6 @@ def render():
 
     try:
         collections_resp = list_collections(token, qdrant_url=qdrant_url)
-=======
-    token = st.session_state.token
-
-    # --------------------------------------------------
-    # PARAMS
-    # --------------------------------------------------
-    try:
-        collections_resp = list_collections(token)
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         collections = [c["name"] for c in collections_resp] if collections_resp else ["eduai_chunks"]
     except Exception:
         collections = ["eduai_chunks"]
@@ -160,7 +139,6 @@ def render():
         key="qa_question",
     )
 
-<<<<<<< HEAD
     data_to_show = None
     if st.button("🔍 Hỏi AI", type="primary"):
         if not question.strip():
@@ -199,30 +177,6 @@ def render():
         # ---------- Question (echo) ----------
         st.subheader("❓ Câu hỏi")
         st.write(data.get("question", ""))
-=======
-    if st.button("🔍 Hỏi AI", type="primary"):
-        if not question.strip():
-            st.warning("Vui lòng nhập câu hỏi")
-            return
-
-        with st.spinner("Đang tìm context và gọi LLM..."):
-            try:
-                data = qa(
-                    question=question.strip(),
-                    top_k=top_k,
-                    temperature=temperature,
-                    token=token,
-                    collection_name=collection_name or None,
-                    score_threshold=score_threshold,
-                )
-            except Exception as exc:
-                st.error(f"Lỗi khi gọi API: {exc}")
-                return
-
-        # ---------- Question (echo) ----------
-        st.subheader("❓ Câu hỏi")
-        st.write(question.strip())
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
         # ---------- Answer ----------
         st.subheader("💡 Câu trả lời")
@@ -234,7 +188,6 @@ def render():
 
         st.markdown(answer)
 
-<<<<<<< HEAD
         # ---------- Like / Dislike (bấm lại cùng nút = xóa, hai nút hiện bình thường) ----------
         feedback = st.session_state.get("qa_feedback") or None
         bl, br = st.columns(2)
@@ -255,8 +208,6 @@ def render():
                     st.session_state.qa_feedback = "dislike"
                 st.rerun()
 
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         st.download_button(
             "⬇️ Tải câu trả lời (TXT)",
             data=answer,

@@ -13,12 +13,8 @@ def _load_env_from_project_root() -> None:
     for parent in [current] + list(current.parents):
         env_file = parent / ".env"
         if env_file.exists():
-<<<<<<< HEAD
             # override=True: .env ghi đè biến môi trường đã có (tránh /data từ Docker khi chạy dev)
             load_dotenv(dotenv_path=env_file, override=True)
-=======
-            load_dotenv(dotenv_path=env_file)
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             return
 
     # Không raise ở đây – để fail-fast ở get_env()

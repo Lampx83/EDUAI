@@ -3,10 +3,7 @@
 import pandas as pd
 import streamlit as st
 
-<<<<<<< HEAD
 from config.settings import qdrant_service_options, normalize_qdrant_url
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 from state.session import require_login
 from services.qdrant_service import (
     list_collections,
@@ -36,7 +33,6 @@ def render():
     token = st.session_state.token
 
     # -------------------------------------------------
-<<<<<<< HEAD
     # Qdrant Service
     # -------------------------------------------------
     qdrant_opts = qdrant_service_options()
@@ -62,12 +58,6 @@ def render():
     # -------------------------------------------------
     try:
         collections = list_collections(token, qdrant_url=qdrant_url)
-=======
-    # LOAD COLLECTIONS
-    # -------------------------------------------------
-    try:
-        collections = list_collections(token)
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     except Exception as exc:
         st.error(f"Không lấy được danh sách collections: {exc}")
         return
@@ -91,11 +81,7 @@ def render():
     # COLLECTION DETAIL (SOURCE OF TRUTH)
     # -------------------------------------------------
     try:
-<<<<<<< HEAD
         detail = get_collection_detail(col_name, token, qdrant_url=qdrant_url)
-=======
-        detail = get_collection_detail(col_name, token)
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     except Exception as exc:
         st.error(f"Lỗi khi lấy collection detail: {exc}")
         return
@@ -208,10 +194,7 @@ def render():
                 section_id=section_id or None,
                 chunk_id=chunk_id if chunk_id > 0 else None,
                 limit=limit,
-<<<<<<< HEAD
                 qdrant_url=qdrant_url,
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             )
         else:
             points = list_points(
@@ -219,10 +202,7 @@ def render():
                 token=token,
                 limit=limit,
                 offset=offset,
-<<<<<<< HEAD
                 qdrant_url=qdrant_url,
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             )
 
     except Exception as exc:

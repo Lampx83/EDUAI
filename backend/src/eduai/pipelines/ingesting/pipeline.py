@@ -1,10 +1,7 @@
 # src/eduai/ingesting/pipeline.py
 from pathlib import Path
 import sqlite3
-<<<<<<< HEAD
 from typing import Optional
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 from eduai.pipelines.ingesting.inbox_scanner import scan_inbox
 from eduai.pipelines.ingesting.raw_ingestor import RawIngestor
@@ -13,7 +10,6 @@ from eduai.pipelines.ingesting.raw_ingestor import RawIngestor
 def run_ingestion(
     inbox_root: Path,
     raw_root: Path,
-<<<<<<< HEAD
     conn: sqlite3.Connection,
     only_domains: Optional[list[str]] = None,
     only_path_prefixes: Optional[list[str]] = None,
@@ -36,11 +32,3 @@ def run_ingestion(
             except ValueError:
                 continue
         ingestor.ingest(inbox_file, force=force_rerun)
-=======
-    conn: sqlite3.Connection
-) -> None:
-    ingestor = RawIngestor(raw_root, conn)
-
-    for inbox_file in scan_inbox(inbox_root):
-        ingestor.ingest(inbox_file)
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56

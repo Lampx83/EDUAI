@@ -118,16 +118,10 @@ def run_pipeline_step(
     only_folders: Optional[list[str]] = None,
     force_rerun: bool = False,
     collection_name: Optional[str] = None,
-<<<<<<< HEAD
     qdrant_url: Optional[str] = None,
     token: Optional[str] = None,
 ) -> dict:
     """Chạy bước pipeline; only_folders = None hoặc [] = chạy toàn bộ; force_rerun = chạy lại kể cả đã làm; collection_name / qdrant_url = chỉ step4 (Qdrant)."""
-=======
-    token: Optional[str] = None,
-) -> dict:
-    """Chạy bước pipeline; only_folders = None hoặc [] = chạy toàn bộ; force_rerun = chạy lại kể cả đã làm; collection_name = chỉ step4 (Qdrant)."""
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     headers = {"Authorization": f"Bearer {token}"} if token else {}
     body = {}
     if only_folders:
@@ -136,11 +130,8 @@ def run_pipeline_step(
         body["force_rerun"] = True
     if collection_name and collection_name.strip():
         body["collection_name"] = collection_name.strip()
-<<<<<<< HEAD
     if step == "step4" and qdrant_url and qdrant_url.strip():
         body["qdrant_url"] = qdrant_url.strip()
-=======
->>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     resp = requests.post(
         f"{API_BASE}/pipeline/run/{step}",
         json=body if body else None,
