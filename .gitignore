@@ -1,14 +1,23 @@
 # ======================
-# EDUAI / Datalake
+# EDUAI / Datalake – chỉ đẩy code & config mẫu, không đẩy env/venv/data/tạm
 # ======================
 
-# ----- Environment & secrets -----
+# ------------------------------
+# Bí mật & biến môi trường
+# ------------------------------
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+!env.example
 *.pem
+*.key
+*.secret
+*credentials*
+*secrets*
 
-# ----- Python -----
+# ------------------------------
+# Python
+# ------------------------------
 __pycache__/
 *.py[cod]
 *$py.class
@@ -27,8 +36,8 @@ sdist/
 var/
 wheels/
 *.egg-info/
-.installed.cfg
 *.egg
+.installed.cfg
 MANIFEST
 .pytest_cache/
 .coverage
@@ -39,19 +48,34 @@ htmlcov/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+.ruff_cache/
+.pytype/
 
-# Virtual environments
+# Virtual env (mọi thư mục)
 .venv/
 venv/
 ENV/
 env/
+backend/.venv/
+frontend/.venv/
 
-# ----- Qdrant local storage -----
+# ------------------------------
+# Dữ liệu & storage local
+# ------------------------------
 qdrant_storage/
+/data/
+*.sqlite
+*.sqlite3
+*.db
+*.npy
+*.npz
 
-# ----- IDE & editors -----
+# ------------------------------
+# IDE & editor
+# ------------------------------
 .idea/
 .vscode/
+.cursor/
 *.swp
 *.swo
 *~
@@ -59,14 +83,19 @@ qdrant_storage/
 .pydevproject
 .settings/
 
-# ----- OS -----
+# ------------------------------
+# Hệ điều hành
+# ------------------------------
 .DS_Store
 .DS_Store?
 ._*
 Thumbs.db
 ehthumbs.db
+Desktop.ini
 
-# ----- Logs & temp -----
+# ------------------------------
+# Log, tạm, backup
+# ------------------------------
 *.log
 logs/
 tmp/
@@ -74,13 +103,42 @@ temp/
 *.tmp
 *.temp
 .cache/
+*.bak
+*.backup
+*.orig
 
-# ----- Jupyter -----
+# ------------------------------
+# Jupyter
+# ------------------------------
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# ----- Streamlit -----
+# ------------------------------
+# Streamlit
+# ------------------------------
 .streamlit/secrets.toml
 
-# ----- Docker -----
-# docker-compose.override.yml
+# ------------------------------
+# Docker (override thường chứa cấu hình local)
+# ------------------------------
+docker-compose.override.yml
+docker-compose.*.local.yml
+
+# ------------------------------
+# Node (nếu sau này dùng)
+# ------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# ------------------------------
+# Khác – tránh đẩy nhầm
+# ------------------------------
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
