@@ -6,7 +6,11 @@ from services.pipeline_service import (
     list_qdrant_collections,
     run_pipeline_step,
 )
+<<<<<<< HEAD
 from config.settings import EDUAI_MODE, qdrant_service_options, normalize_qdrant_url
+=======
+from config.settings import EDUAI_MODE
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 from state.session import require_login
 
 STEPS = [
@@ -119,6 +123,7 @@ def render():
                 key=f"pipeline_force_{step}",
             )
 
+<<<<<<< HEAD
             # Chỉ bước Qdrant Indexing: chọn Qdrant Service + collection
             collection_name = None
             pipeline_qdrant_url = None  # dùng khi step == "step4"
@@ -146,6 +151,11 @@ def render():
                     else qdrant_values[qdrant_idx]
                 )
 
+=======
+            # Chỉ bước Qdrant Indexing: chọn collection có sẵn hoặc nhập tên mới
+            collection_name = None
+            if step == "step4":
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
                 st.caption("**Collection Qdrant** — chọn có sẵn hoặc nhập tên mới (để trống = dùng mặc định `eduai_chunks`).")
                 existing = list_qdrant_collections(token=token)
                 opts = ["(Mặc định: eduai_chunks)", "(Nhập tên mới)"] + sorted(existing or [])
@@ -172,7 +182,10 @@ def render():
                             only_folders=selected if selected else None,
                             force_rerun=force_rerun,
                             collection_name=collection_name if step == "step4" else None,
+<<<<<<< HEAD
                             qdrant_url=pipeline_qdrant_url if step == "step4" else None,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
                             token=token,
                         )
                         st.code(result.get("stdout", ""))

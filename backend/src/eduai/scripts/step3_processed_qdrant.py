@@ -16,7 +16,10 @@ load_dotenv()
 import numpy as np
 from qdrant_client import QdrantClient
 
+<<<<<<< HEAD
 from eduai.common.nas_io import nas_safe_load_npy
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 from eduai.runtime.config import runtime_config
 from eduai.config import paths
 from eduai.vectorstore.qdrant_ingest import (
@@ -39,7 +42,11 @@ if not data_base:
 base_path = Path(data_base).expanduser().resolve()
 runtime_config.set_data_base_path(base_path)
 
+<<<<<<< HEAD
 print(f"[BOOT] DATA_BASE_PATH3 = {base_path}")
+=======
+print(f"[BOOT] DATA_BASE_PATH = {base_path}")
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 
 # ======================================================
@@ -87,6 +94,7 @@ def main():
             f"Cannot connect to Qdrant at {QDRANT_HOST}:{QDRANT_PORT}"
         ) from exc
 
+<<<<<<< HEAD
     only_folders_env = os.getenv("PIPELINE_ONLY_FOLDERS")
     only_folders = [s.strip() for s in (only_folders_env or "").split(",") if s.strip()] or None
     collection_name = (os.getenv("PIPELINE_QDRANT_COLLECTION") or "").strip() or None
@@ -114,10 +122,18 @@ def main():
 
     only_folders_set = set(only_folders) if only_folders else None
 
+=======
+    ingested = skipped = failed = 0
+
+    emb_dirs = list(embeddings_root.iterdir())
+    print(f"[DEBUG] Found {len(emb_dirs)} embedding dirs")
+
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     # -------------------------
     # Iterate over embeddings
     # -------------------------
     for emb_dir in emb_dirs:
+<<<<<<< HEAD
         file_hash = emb_dir.name
         parent_name = emb_dir.parent.name if emb_dir.parent != embeddings_root else None
         rel_path = f"{parent_name}/{file_hash}" if parent_name else file_hash
@@ -135,6 +151,12 @@ def main():
             else:
                 continue
 
+=======
+        if not emb_dir.is_dir():
+            continue
+
+        file_hash = emb_dir.name
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         embeddings_file = emb_dir / "embedding.npy"
 
         print(f"\n[QDRANT] Processing {file_hash}")
@@ -146,8 +168,13 @@ def main():
             continue
 
         try:
+<<<<<<< HEAD
             # ---------- Load vectors (đọc từ NAS với retry) ----------
             vectors = nas_safe_load_npy(embeddings_file)
+=======
+            # ---------- Load vectors ----------
+            vectors = np.load(embeddings_file)
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             if vectors.ndim != 2:
                 raise RuntimeError(
                     f"Invalid embedding shape for {file_hash}"
@@ -157,17 +184,26 @@ def main():
             ensure_collection(
                 client=client,
                 vector_dim=vectors.shape[1],
+<<<<<<< HEAD
                 collection_name=collection_name,
             )
 
             # ---------- Ingest (truyền parent_name để tránh iterdir trên NAS) ----------
+=======
+            )
+
+            # ---------- Ingest ----------
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             count = ingest_file_embeddings(
                 client=client,
                 file_hash=file_hash,
                 embeddings_dir=emb_dir,
                 processed_root=processed_root,
+<<<<<<< HEAD
                 collection_name=collection_name,
                 parent_dir=parent_name,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             )
 
             print(

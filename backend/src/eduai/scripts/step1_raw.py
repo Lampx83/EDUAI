@@ -28,7 +28,11 @@ if not data_base:
 base_path = Path(data_base).expanduser().resolve()
 runtime_config.set_data_base_path(base_path)
 
+<<<<<<< HEAD
 print(f"[BOOT] DATA_BASE_PATH1 = {base_path}")
+=======
+print(f"[BOOT] DATA_BASE_PATH = {base_path}")
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 
 # ======================================================
@@ -39,6 +43,7 @@ def extract_file_hash(pdf_path: Path) -> str:
     return pdf_path.stem
 
 
+<<<<<<< HEAD
 def _parent_dir_from_raw(pdf_path: Path, raw_root: Path) -> str:
     """Thư mục cha trong 100_raw (domain)."""
     try:
@@ -54,6 +59,10 @@ def already_staged(file_hash: str, parent_dir: str = "") -> bool:
     if parent_dir:
         return (root / parent_dir / file_hash / "validation.json").exists()
     return (root / file_hash / "validation.json").exists()
+=======
+def already_staged(file_hash: str) -> bool:
+    return (paths.staging_path() / file_hash / "validation.json").exists()
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 
 # ======================================================
@@ -69,6 +78,7 @@ def main():
     if not raw_root.exists():
         raise RuntimeError(f"RAW_PATH does not exist: {raw_root}")
 
+<<<<<<< HEAD
     only_folders_env = os.getenv("PIPELINE_ONLY_FOLDERS")
     only_path_prefixes = [s.strip().rstrip("/") for s in (only_folders_env or "").split(",") if s.strip()] or None
     force_rerun = os.getenv("PIPELINE_FORCE_RERUN") == "1"
@@ -77,12 +87,15 @@ def main():
     if force_rerun:
         print("[STAGING] Force re-run: chạy lại kể cả đã staging")
 
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     processed = skipped = failed = 0
 
     pdf_files = list(raw_root.rglob("*.pdf"))
     print(f"[DEBUG] Found {len(pdf_files)} PDF files")
 
     for pdf_path in pdf_files:
+<<<<<<< HEAD
         if only_path_prefixes:
             try:
                 rel_str = str(pdf_path.relative_to(raw_root)).replace("\\", "/")
@@ -94,6 +107,11 @@ def main():
         parent_dir = _parent_dir_from_raw(pdf_path, raw_root)
 
         if not force_rerun and already_staged(file_hash, parent_dir):
+=======
+        file_hash = extract_file_hash(pdf_path)
+
+        if already_staged(file_hash):
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             print(f"[STAGING][SKIP] Already staged: {file_hash}")
             skipped += 1
             continue
@@ -105,7 +123,10 @@ def main():
                 file_hash=file_hash,
                 raw_pdf_path=pdf_path,
                 staging_root=paths.staging_path(),
+<<<<<<< HEAD
                 parent_dir=parent_dir or None,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             )
             processed += 1
 

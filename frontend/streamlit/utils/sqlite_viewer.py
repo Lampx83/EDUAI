@@ -4,12 +4,19 @@ import pandas as pd
 from typing import List
 
 
+<<<<<<< HEAD
 def connect_readonly(db_path: Path, timeout: float = 15.0) -> sqlite3.Connection:
     path_str = str(Path(db_path).resolve().as_posix())
     return sqlite3.connect(
         f"file:{path_str}?mode=ro",
         uri=True,
         timeout=timeout,
+=======
+def connect_readonly(db_path: Path) -> sqlite3.Connection:
+    return sqlite3.connect(
+        f"file:{db_path}?mode=ro",
+        uri=True,
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         check_same_thread=False,
     )
 

@@ -29,7 +29,11 @@ if not data_base:
 base_path = Path(data_base).expanduser().resolve()
 runtime_config.set_data_base_path(base_path)
 
+<<<<<<< HEAD
 print(f"[BOOT] DATA_BASE_PATH2 = {base_path}")
+=======
+print(f"[BOOT] DATA_BASE_PATH = {base_path}")
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 
 # ======================================================
@@ -50,6 +54,7 @@ def main():
     if not staging_root.exists():
         raise RuntimeError(f"STAGING_PATH does not exist: {staging_root}")
 
+<<<<<<< HEAD
     only_folders_env = os.getenv("PIPELINE_ONLY_FOLDERS")
     only_folders = [s.strip() for s in (only_folders_env or "").split(",") if s.strip()] or None
     force_rerun = os.getenv("PIPELINE_FORCE_RERUN") == "1"
@@ -95,6 +100,18 @@ def main():
             else:
                 continue
 
+=======
+    processed_count = 0
+
+    staging_dirs = list(staging_root.iterdir())
+    print(f"[DEBUG] Found {len(staging_dirs)} staging dirs")
+
+    for staging_dir in staging_dirs:
+        if not staging_dir.is_dir():
+            continue
+
+        file_hash = staging_dir.name
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         raw_file = find_raw_file(file_hash, raw_root)
 
         if raw_file is None:
@@ -107,8 +124,12 @@ def main():
                 raw_file_path=raw_file,
                 staging_dir=staging_dir,
                 processed_root=processed_root,
+<<<<<<< HEAD
                 force=force_rerun,
                 parent_dir=parent_name or None,
+=======
+                force=True,
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             )
             processed_count += 1
 

@@ -1,4 +1,5 @@
 # src/eduai/catalog/db.py
+<<<<<<< HEAD
 import logging
 import sqlite3
 from pathlib import Path
@@ -73,6 +74,27 @@ def get_connection(db_path: Path) -> sqlite3.Connection:
         conn = _connect()
         log.info("Recreated catalog DB successfully: %s", db_path)
         return conn
+=======
+import sqlite3
+from pathlib import Path
+
+
+def get_connection(db_path: Path) -> sqlite3.Connection:
+    # Đảm bảo thư mục cha tồn tại
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+
+    conn = sqlite3.connect(
+        db_path,
+        timeout=30,              # chờ lock lâu hơn
+        isolation_level=None     # autocommit mode
+    )
+
+    # ⚠️ KHÔNG WAL trên NAS
+    conn.execute("PRAGMA journal_mode=DELETE;")
+    conn.execute("PRAGMA synchronous=FULL;")
+
+    return conn
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 
 def init_db(conn: sqlite3.Connection) -> None:

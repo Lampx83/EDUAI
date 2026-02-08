@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 # Load .env sớm nhất (trước mọi import dùng config)
 import eduai.config.env  # noqa: F401, E402 — trigger load_dotenv
 
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,7 +13,10 @@ from eduai.api.search import router as search_router
 from eduai.api.pipeline import router as pipeline_router
 from eduai.api.system import router as system_router
 from eduai.api.qdrant import router as qdrant_router
+<<<<<<< HEAD
 from eduai.api.admin import router as admin_router
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 from pathlib import Path
 from eduai.runtime.config import runtime_config
@@ -45,7 +51,11 @@ def create_app() -> FastAPI:
     try:
         base = Path(get_env("EDUAI_DATA_BASE_PATH")).resolve()
         runtime_config.set_data_base_path(base)
+<<<<<<< HEAD
         print(f"[BOOT] DATA_BASE_PATH1 = {base}")
+=======
+        print(f"[BOOT] DATA_BASE_PATH = {base}")
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     except Exception as exc:
         print(f"[BOOT] DATA_BASE_PATH not set: {exc}")
 
@@ -75,9 +85,12 @@ def create_app() -> FastAPI:
     app.include_router(
         qdrant_router,
     )
+<<<<<<< HEAD
     app.include_router(
         admin_router,
     )
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     # -------------------------
     # Health check

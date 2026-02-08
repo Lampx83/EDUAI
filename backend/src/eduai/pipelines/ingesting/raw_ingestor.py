@@ -16,7 +16,11 @@ class RawIngestor:
         self.raw_root = raw_root
         self.conn = conn
 
+<<<<<<< HEAD
     def ingest(self, inbox_file: InboxFile, force: bool = False) -> None:
+=======
+    def ingest(self, inbox_file: InboxFile) -> None:
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         src = inbox_file.path
         domain = inbox_file.domain
 
@@ -36,8 +40,13 @@ class RawIngestor:
         raw_path = self.raw_root / domain / f"{file_hash}{ext}"
         now = datetime.utcnow().isoformat()
 
+<<<<<<< HEAD
         # ---------- DEDUP (bỏ qua nếu force) ----------
         if not force and hash_exists(self.conn, file_hash):
+=======
+        # ---------- DEDUP ----------
+        if hash_exists(self.conn, file_hash):
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
             print("[INGEST]   Duplicate detected, skip copy")
             self._log(src, file_hash, "DUPLICATE", "Hash already exists")
             return
@@ -54,6 +63,7 @@ class RawIngestor:
             raise RuntimeError("Hash verification failed")
 
         # ---------- DB ----------
+<<<<<<< HEAD
         if hash_exists(self.conn, file_hash):
             print("[INGEST]   Updating catalog (force re-ingest)")
             self.conn.execute(
@@ -66,6 +76,13 @@ class RawIngestor:
                 "INSERT INTO raw_objects VALUES (?, ?, ?, ?, ?)",
                 (file_hash, domain, str(raw_path), src.stat().st_size, now),
             )
+=======
+        print("[INGEST]   Writing metadata to catalog")
+        self.conn.execute(
+            "INSERT INTO raw_objects VALUES (?, ?, ?, ?, ?)",
+            (file_hash, domain, str(raw_path), src.stat().st_size, now)
+        )
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         self._log(src, file_hash, "COPIED", None)
         self.conn.commit()
 

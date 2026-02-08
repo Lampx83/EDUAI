@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException, Depends
 import requests
 
@@ -14,6 +15,18 @@ from eduai.core.auth import verify_token
 from eduai.catalog.app_db import insert_message
 from eduai.vectorstore.constants import COLLECTION_NAME as DEFAULT_COLLECTION_NAME
 from eduai.core.config import get_qdrant_url, OPENAI_API_KEY, OPENAI_MODEL, OPENAI_BASE_URL
+=======
+from fastapi import APIRouter
+import requests
+
+from eduai.api.schemas.search import (
+    SemanticSearchRequest,
+    SemanticSearchResponse,
+)
+from eduai.api.deps import get_embedding_model
+from eduai.vectorstore.constants import COLLECTION_NAME
+from eduai.core.config import QDRANT_URL
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 router = APIRouter(
     prefix="/search",
@@ -22,6 +35,7 @@ router = APIRouter(
 
 
 @router.post(
+<<<<<<< HEAD
     "/embed",
     response_model=EmbedResponse,
     summary="Vector hóa chuỗi",
@@ -47,6 +61,8 @@ def embed_text(req: EmbedRequest) -> dict:
 
 
 @router.post(
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     "/semantic",
     response_model=SemanticSearchResponse,
 )
@@ -68,9 +84,13 @@ def semantic_search(req: SemanticSearchRequest):
     # --------------------------------------------------
     # 2. Call Qdrant REST API
     # --------------------------------------------------
+<<<<<<< HEAD
     base = get_qdrant_url(req.qdrant_url)
     coll = (req.collection_name or DEFAULT_COLLECTION_NAME).strip() or DEFAULT_COLLECTION_NAME
     url = f"{base}/collections/{coll}/points/search"
+=======
+    url = f"{QDRANT_URL}/collections/{COLLECTION_NAME}/points/search"
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     payload = {
         "vector": query_vector,
@@ -78,14 +98,21 @@ def semantic_search(req: SemanticSearchRequest):
         "with_payload": True,
         "with_vector": False,
     }
+<<<<<<< HEAD
     if req.score_threshold is not None:
         payload["score_threshold"] = req.score_threshold
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     try:
         resp = requests.post(
             url,
             json=payload,
+<<<<<<< HEAD
             timeout=15,
+=======
+            timeout=10,
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         )
         resp.raise_for_status()
     except requests.RequestException as exc:
@@ -100,6 +127,7 @@ def semantic_search(req: SemanticSearchRequest):
 
     results = []
     for p in points:
+<<<<<<< HEAD
         pl = p.get("payload", {}) or {}
         results.append({
             "id": p.get("id"),
@@ -110,12 +138,24 @@ def semantic_search(req: SemanticSearchRequest):
             "text": pl.get("text"),
             "token_estimate": pl.get("token_estimate"),
             "source": pl.get("source"),
+=======
+        payload = p.get("payload", {}) or {}
+
+        results.append({
+            "score": float(p.get("score", 0.0)),
+            "file_hash": payload.get("file_hash"),
+            "chunk_id": payload.get("chunk_id"),
+            "section_id": payload.get("section_id"),
+            "text": payload.get("text"),
+            "token_estimate": payload.get("token_estimate"),
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         })
 
     return {
         "query": req.query,
         "results": results,
     }
+<<<<<<< HEAD
 
 
 @router.post(
@@ -283,3 +323,5 @@ Trả lời (chỉ dựa trên context trên):"""
         "contexts": contexts,
         "model_used": model_used,
     }
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56

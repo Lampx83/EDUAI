@@ -128,6 +128,7 @@ Giao diện chính:
 
 ⚠️ Chỉ dùng khi debug UI, **không dùng cho pipeline thật**
 
+<<<<<<< HEAD
 ### 5.0. Cấu hình folder NAS khi chạy dev
 
 Cấu hình trong **file `.env`** tại **project root** (thư mục `EDUAI/`).
@@ -151,6 +152,8 @@ API_BASE_URL=http://localhost:8011
 
 Backend và frontend đều đọc **`EDUAI_DATA_BASE_PATH`** từ `.env` (sau khi bạn `export` hoặc load env trước khi chạy). Data Lake Explorer trong UI sẽ dùng đúng folder NAS này.
 
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ### 5.1. Cài dependency
 
 ```bash
@@ -160,14 +163,18 @@ pip install -r requirements.txt
 
 ### 5.2. Chạy Streamlit
 
+<<<<<<< HEAD
 **Bắt buộc chạy từ thư mục `frontend/streamlit`** (để Streamlit nhận config và watch đúng file):
 
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ```bash
 cd frontend/streamlit
 export $(grep -v '^#' ../../.env | xargs)
 streamlit run app.py
 ```
 
+<<<<<<< HEAD
 Hoặc dùng script (từ project root):
 
 ```bash
@@ -205,6 +212,8 @@ Streamlit đọc config từ **thư mục bạn chạy lệnh** (CWD):
 
 Nếu vẫn không reload: dùng **Cách 1** (`dev_with_reload.py`).
 
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ⚠️ Lưu ý:
 
 * Backend **phải chạy trước**
@@ -226,8 +235,13 @@ Nếu vẫn không reload: dùng **Cách 1** (`dev_with_reload.py`).
 ### 6.2. Semantic Search
 
 * Nhập query ngôn ngữ tự nhiên
+<<<<<<< HEAD
 * Chọn Qdrant từ dropdown **hoặc gõ địa chỉ Qdrant tùy chỉnh** (vd. `http://host:6333`)
 * Truy vấn Qdrant, hiển thị chunk, score, metadata
+=======
+* Truy vấn Qdrant
+* Hiển thị chunk, score, metadata
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 ---
 

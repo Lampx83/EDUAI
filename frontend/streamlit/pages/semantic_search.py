@@ -3,7 +3,10 @@
 import pandas as pd
 import streamlit as st
 
+<<<<<<< HEAD
 from config.settings import qdrant_service_options, normalize_qdrant_url
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 from services.api_client import semantic_search
 from services.qdrant_service import list_collections
 from state.session import require_login
@@ -22,6 +25,7 @@ def render():
     token = st.session_state.token
 
     # --------------------------------------------------
+<<<<<<< HEAD
     # Qdrant Service + Collection + PARAMS
     # --------------------------------------------------
     qdrant_opts = qdrant_service_options()
@@ -44,6 +48,12 @@ def render():
 
     try:
         collections_resp = list_collections(token, qdrant_url=qdrant_url)
+=======
+    # COLLECTION + PARAMS
+    # --------------------------------------------------
+    try:
+        collections_resp = list_collections(token)
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         collections = [c["name"] for c in collections_resp] if collections_resp else ["eduai_chunks"]
     except Exception:
         collections = ["eduai_chunks"]
@@ -97,7 +107,10 @@ def render():
                     top_k=top_k,
                     token=token,
                     collection_name=collection_name or None,
+<<<<<<< HEAD
                     qdrant_url=qdrant_url,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
                     score_threshold=score_threshold,
                 )
             except Exception as exc:

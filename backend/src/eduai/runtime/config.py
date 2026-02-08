@@ -17,7 +17,11 @@ class RuntimeConfig:
     # -------------------------
     def set_data_base_path(self, path: Path) -> None:
         with self._lock:
+<<<<<<< HEAD
             self._data_base_path = Path(path)
+=======
+            self._data_base_path = path
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     def get_data_base_path(self) -> Path:
         with self._lock:

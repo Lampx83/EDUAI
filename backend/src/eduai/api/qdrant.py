@@ -46,10 +46,13 @@ class QdrantFilterRequest(BaseModel):
         le=200,
         description="Số lượng point trả về",
     )
+<<<<<<< HEAD
     qdrant_url: Optional[str] = Field(
         default=None,
         description="URL Qdrant Service (trống = mặc định theo env)",
     )
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 
 # =====================================================
@@ -58,7 +61,10 @@ class QdrantFilterRequest(BaseModel):
 
 @router.get("/collections")
 def api_list_collections(
+<<<<<<< HEAD
     qdrant_url: Optional[str] = Query(None, description="URL Qdrant Service (trống = mặc định)"),
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     user=Depends(verify_token),
 ):
     """
@@ -66,20 +72,31 @@ def api_list_collections(
     (dùng cho Qdrant Inspector – read-only)
     """
     return {
+<<<<<<< HEAD
         "collections": list_collections(qdrant_url=qdrant_url)
+=======
+        "collections": list_collections()
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     }
 
 
 @router.get("/collections/{name}")
 def api_get_collection_detail(
     name: str,
+<<<<<<< HEAD
     qdrant_url: Optional[str] = Query(None, description="URL Qdrant Service (trống = mặc định)"),
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     user=Depends(verify_token),
 ):
     """
     Thông tin chi tiết của một collection
     """
+<<<<<<< HEAD
     return get_collection_detail(name, qdrant_url=qdrant_url)
+=======
+    return get_collection_detail(name)
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 
 @router.get("/collections/{name}/points")
@@ -96,7 +113,10 @@ def api_list_points(
         ge=0,
         description="Offset cho scroll",
     ),
+<<<<<<< HEAD
     qdrant_url: Optional[str] = Query(None, description="URL Qdrant Service (trống = mặc định)"),
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     user=Depends(verify_token),
 ):
     """
@@ -107,7 +127,10 @@ def api_list_points(
             collection=name,
             limit=limit,
             offset=offset,
+<<<<<<< HEAD
             qdrant_url=qdrant_url,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         )
     }
 
@@ -128,6 +151,9 @@ def api_filter_points(
             section_id=req.section_id,
             chunk_id=req.chunk_id,
             limit=req.limit,
+<<<<<<< HEAD
             qdrant_url=req.qdrant_url,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         )
     }

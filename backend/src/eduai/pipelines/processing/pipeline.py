@@ -1,7 +1,11 @@
 # src/eduai/processing/processing/pipeline.py
 
 from pathlib import Path
+<<<<<<< HEAD
 from typing import Dict, Any, Optional
+=======
+from typing import Dict, Any
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 from eduai.pipelines.processing.excel_pipeline import run_excel_pipeline
 from eduai.pipelines.processing.pdf_pipeline import run_pdf_pipeline
@@ -26,14 +30,20 @@ def run_processed_pipeline(
     staging_dir: Path,
     processed_root: Path,
     force: bool = False,
+<<<<<<< HEAD
     parent_dir: Optional[str] = None,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ) -> None:
     """
     Orchestrator cho bước 300_processed.
 
+<<<<<<< HEAD
     parent_dir: thư mục cha (domain) — output sẽ là 300_processed/<parent_dir>/<file_hash>/
     Nếu không truyền: 300_processed/<file_hash>/ (giữ tương thích).
 
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     Parameters
     ----------
     file_hash : str
@@ -41,13 +51,20 @@ def run_processed_pipeline(
     raw_file_path : Path
         Đường dẫn file trong 100_raw
     staging_dir : Path
+<<<<<<< HEAD
         Thư mục 200_staging/<domain>/<file_hash> hoặc 200_staging/<file_hash>
+=======
+        Thư mục 200_staging/<file_hash>
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     processed_root : Path
         Root của 300_processed
     force : bool
         True để xử lý lại dù đã có processing data
+<<<<<<< HEAD
     parent_dir : str, optional
         Thư mục cha (domain) để ghi 300_processed/<parent_dir>/<file_hash>/
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     """
 
     print(f"[300] Start processing: {file_hash}")
@@ -73,10 +90,14 @@ def run_processed_pipeline(
         )
 
     # ---------- 2. Prepare output directory ----------
+<<<<<<< HEAD
     if parent_dir:
         out_dir = processed_root / parent_dir / file_hash
     else:
         out_dir = processed_root / file_hash
+=======
+    out_dir = processed_root / file_hash
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     if out_dir.exists() and not force:
         existing = {p.name for p in out_dir.iterdir() if p.is_file()}

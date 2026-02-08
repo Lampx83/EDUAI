@@ -1,6 +1,10 @@
 from pathlib import Path
+<<<<<<< HEAD
 from typing import List, Dict, Any, Optional
 import tempfile
+=======
+from typing import List, Dict, Any
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 import uuid
 
 import numpy as np
@@ -12,10 +16,13 @@ from qdrant_client.models import (
 )
 
 from eduai.common.jsonio import read_json
+<<<<<<< HEAD
 from eduai.common.nas_io import (
     nas_safe_copy,
     nas_safe_find_processed_dir,
 )
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 from eduai.vectorstore.constants import COLLECTION_NAME
 
 
@@ -26,11 +33,15 @@ from eduai.vectorstore.constants import COLLECTION_NAME
 def ensure_collection(
     client: QdrantClient,
     vector_dim: int,
+<<<<<<< HEAD
     collection_name: Optional[str] = None,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ) -> None:
     """
     Ensure Qdrant collection exists.
     If already exists → do nothing.
+<<<<<<< HEAD
     collection_name: tên collection; None = dùng COLLECTION_NAME mặc định.
     """
     name = (collection_name or "").strip() or COLLECTION_NAME
@@ -41,6 +52,16 @@ def ensure_collection(
 
     client.create_collection(
         collection_name=name,
+=======
+    """
+
+    collections = client.get_collections().collections
+    if any(c.name == COLLECTION_NAME for c in collections):
+        return
+
+    client.create_collection(
+        collection_name=COLLECTION_NAME,
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         vectors_config=VectorParams(
             size=vector_dim,
             distance=Distance.COSINE,
@@ -57,24 +78,34 @@ def ingest_file_embeddings(
     file_hash: str,
     embeddings_dir: Path,
     processed_root: Path,
+<<<<<<< HEAD
     collection_name: Optional[str] = None,
     parent_dir: Optional[str] = None,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ) -> int:
     """
     Ingest embeddings of one file into Qdrant.
 
+<<<<<<< HEAD
     parent_dir: tên domain (thư mục cha trong 400_embeddings); nếu có thì tránh iterdir trên NAS.
     collection_name: tên collection; None = dùng COLLECTION_NAME mặc định.
 
     Source of truth:
     - Vectors + meta: 400_embeddings/<domain>/<file_hash> hoặc 400_embeddings/<file_hash>
     - Text chunks   : 300_processed/<domain>/<file_hash>/chunks.json hoặc 300_processed/<file_hash>/chunks.json
+=======
+    Source of truth:
+    - Vectors + meta: 400_embeddings/<file_hash>
+    - Text chunks   : 300_processed/<file_hash>/chunks.json
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     Returns
     -------
     int
         Number of vectors ingested
     """
+<<<<<<< HEAD
     coll_name = (collection_name or "").strip() or COLLECTION_NAME
 
     # --------------------------------------------------
@@ -105,6 +136,42 @@ def ingest_file_embeddings(
         vectors = np.load(tmp_embed)
         chunks_meta: List[Dict[str, Any]] = read_json(tmp_meta)
         chunks: List[Dict[str, Any]] = read_json(tmp_chunks)
+=======
+
+    # --------------------------------------------------
+    # Paths
+    # --------------------------------------------------
+
+    embeddings_file = embeddings_dir / "embedding.npy"
+    meta_file = embeddings_dir / "chunks_meta.json"
+    processed_chunks_file = (
+        processed_root / file_hash / "chunks.json"
+    )
+
+    if not embeddings_file.exists():
+        raise FileNotFoundError(
+            f"Missing embedding.npy for {file_hash}"
+        )
+
+    if not meta_file.exists():
+        raise FileNotFoundError(
+            f"Missing chunks_meta.json for {file_hash}"
+        )
+
+    if not processed_chunks_file.exists():
+        raise FileNotFoundError(
+            f"Missing 300_processed chunks.json for {file_hash}"
+        )
+
+    # --------------------------------------------------
+    # Load data
+    # --------------------------------------------------
+
+    vectors = np.load(embeddings_file)
+
+    chunks_meta: List[Dict[str, Any]] = read_json(meta_file)
+    chunks: List[Dict[str, Any]] = read_json(processed_chunks_file)
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     if len(vectors) != len(chunks_meta):
         raise RuntimeError(
@@ -160,7 +227,11 @@ def ingest_file_embeddings(
     # --------------------------------------------------
 
     client.upsert(
+<<<<<<< HEAD
         collection_name=coll_name,
+=======
+        collection_name=COLLECTION_NAME,
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         points=points,
     )
 

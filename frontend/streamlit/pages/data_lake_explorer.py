@@ -3,10 +3,13 @@
 from pathlib import Path
 import hashlib
 import json
+<<<<<<< HEAD
 import os
 import shutil
 import tempfile
 import time
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
 import streamlit as st
 
@@ -291,6 +294,7 @@ def _download_button(file_path: Path) -> None:
         pass
 
 
+<<<<<<< HEAD
 def _sqlite_copy_to_local(db_path: Path) -> Path:
     """
     Copy SQLite file từ NAS sang temp local — tránh disk I/O error trên NFS.
@@ -326,6 +330,11 @@ def render_sqlite_viewer(zone_path: Path) -> None:
     """
     SQLite viewer (chỉ cho 500_catalog).
     Copy DB sang file tạm local trước khi mở để tránh lỗi disk I/O trên NAS/NFS.
+=======
+def render_sqlite_viewer(zone_path: Path) -> None:
+    """
+    SQLite viewer (chỉ cho 500_catalog).
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     """
     sqlite_files = [
         p for p in zone_path.iterdir()
@@ -338,7 +347,11 @@ def render_sqlite_viewer(zone_path: Path) -> None:
 
     st.divider()
     st.subheader("📊 SQLite Database Viewer")
+<<<<<<< HEAD
     st.caption("Chế độ chỉ đọc – phục vụ kiểm tra catalog & ingest log. DB được copy tạm ra ổ local để tránh lỗi I/O trên NAS.")
+=======
+    st.caption("Chế độ chỉ đọc – phục vụ kiểm tra catalog & ingest log")
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 
     db_file = st.selectbox(
         "🗄️ Chọn database",
@@ -346,6 +359,7 @@ def render_sqlite_viewer(zone_path: Path) -> None:
         format_func=lambda p: p.name,
     )
 
+<<<<<<< HEAD
     # Cache bản copy local theo path DB đã chọn; chỉ dùng lại nếu file tạm còn tồn tại
     cache_key = "sqlite_local_copy"
     path_key = "sqlite_local_copy_path"
@@ -374,6 +388,10 @@ def render_sqlite_viewer(zone_path: Path) -> None:
 
     try:
         conn = connect_readonly(local_copy)
+=======
+    try:
+        conn = connect_readonly(db_file)
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     except Exception as exc:
         st.error(f"Không mở được database: {exc}")
         return

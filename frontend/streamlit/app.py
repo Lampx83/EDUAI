@@ -14,7 +14,10 @@ from pages import (
     data_lake_explorer,
     system_settings,
     qdrant_inspector,
+<<<<<<< HEAD
     admin,
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 )
 
 
@@ -68,7 +71,10 @@ with st.sidebar:
         st.button("🧠 Qdrant Inspector", on_click=set_page, args=("qdrant_inspector",), use_container_width=True)
         st.button("🔎 Semantic Search", on_click=set_page, args=("semantic_search",), use_container_width=True)
         st.button("🤖 Hỏi đáp với AI", on_click=set_page, args=("qa",), use_container_width=True)
+<<<<<<< HEAD
         st.button("👤 Admin", on_click=set_page, args=("admin",), use_container_width=True)
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
         st.button("⚙️ System Settings", on_click=set_page, args=("system_settings",), use_container_width=True)
 
 
@@ -91,8 +97,11 @@ elif page == "system_settings":
     system_settings.render()
 elif page == "qdrant_inspector":
     qdrant_inspector.render()
+<<<<<<< HEAD
 elif page == "admin":
     admin.render()
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 else:
     st.error(f"Unknown page: {page}")
 

@@ -57,6 +57,7 @@ QDRANT_API_KEY = os.getenv(
 
 QDRANT_URL = f"http://{QDRANT_HOST}:{QDRANT_PORT}"
 
+<<<<<<< HEAD
 
 def get_qdrant_url(override: str | None = None) -> str:
     """URL Qdrant dùng cho request: override nếu có, không thì dùng env (mặc định dev=localhost:6333, docker=eduai-qdrant:6333 qua QDRANT_HOST)."""
@@ -72,6 +73,8 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", None)
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
 OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", None)  # For custom endpoints
 
+=======
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 # =====================================================
 # LOG BOOT INFO (DEV ONLY)
 # =====================================================
@@ -79,7 +82,11 @@ OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", None)  # For custom endpoints
 if DEBUG:
     print("[BOOT] ENV =", ENV)
     print("[BOOT] DEBUG =", DEBUG)
+<<<<<<< HEAD
     print("[BOOT] DATA_BASE_PATH1 =", DATA_BASE_PATH)
+=======
+    print("[BOOT] DATA_BASE_PATH =", DATA_BASE_PATH)
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
     print("[BOOT] JWT_ALGORITHM =", JWT_ALGORITHM)
     print("[BOOT] JWT_EXPIRE_MINUTES =", JWT_EXPIRE_MINUTES)
     print("[BOOT] QDRANT_URL =", QDRANT_URL)

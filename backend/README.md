@@ -130,6 +130,7 @@ python -m uvicorn eduai.main:app --reload --port 8011
 ```
 Chú ý cần chạy Qdrant (nếu sử dụng)
 ```
+<<<<<<< HEAD
 docker compose up qdrant
 ```
 ---
@@ -141,6 +142,16 @@ docker compose up qdrant
 * **API Vector hóa chuỗi (Embed):** xem [docs/API_EMBED.md](docs/API_EMBED.md) — `POST /search/embed` để nhận vector embedding của một chuỗi.
 
 ---
+=======
+docker run -d \
+  --name qdrant \
+  -p 6333:6333 \
+  -p 6334:6334 \
+  -v $(pwd)/qdrant_storage:/qdrant/storage \
+  qdrant/qdrant:v1.16.2
+```
+---
+>>>>>>> 59e59ae0f1ae7f00b194320e3da9c0520b7f9c56
 ## 6. Hướng dẫn pipeline dữ liệu
 
 ### 6.1 Bước 0 – Ingest Inbox → Raw
